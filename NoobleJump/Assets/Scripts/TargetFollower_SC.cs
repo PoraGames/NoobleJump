@@ -21,17 +21,17 @@ public class TargetFollower_SC : MonoBehaviour
 
     public Vector3 deltaPos;
 
-    void Awake()
-    {
-        // Запоминает начальный отступ по всем осям, по которым будет синхронизация
-        deltaPos = Vector3.zero;
-        if (followXAxis)
-            deltaPos += Vector3.right * (transform.position.x - targetTransform.position.x);
-        if (followYAxis)
-            deltaPos += Vector3.up * (transform.position.y - targetTransform.position.y);
-        if (followZAxis)
-            deltaPos += Vector3.forward * (transform.position.z - targetTransform.position.z);
-    }
+    //void Awake()
+    //{
+    //    // Запоминает начальный отступ по всем осям, по которым будет синхронизация
+    //    deltaPos = Vector3.zero;
+    //    if (followXAxis)
+    //        deltaPos += Vector3.right * (transform.position.x - targetTransform.position.x);
+    //    if (followYAxis)
+    //        deltaPos += Vector3.up * (transform.position.y - targetTransform.position.y);
+    //    if (followZAxis)
+    //        deltaPos += Vector3.forward * (transform.position.z - targetTransform.position.z);
+    //}
 
     void FixedUpdate()
     {
