@@ -23,6 +23,8 @@ public class Unit_SC : MonoBehaviour
 
     public LayerMask whatIsGround;
 
+    public Platform_SC lastPlatform;
+
     /// <summary>
     /// Уничтожить этого юнита
     /// </summary>
@@ -35,9 +37,13 @@ public class Unit_SC : MonoBehaviour
     {
         foreach (Transform point in groundCheckPoints)
         {
-            if (Physics2D.OverlapCircle(point.position, groundCheckRadius, whatIsGround))
+            Collider2D _coll = Physics2D.OverlapCircle(point.position, groundCheckRadius, whatIsGround);
+            if (_coll)
             {
                 isGrounded = true;
+                lastPlatform = _coll.transform.GetComponent<Platform_SC>();// Запоминаем платформу
+                if (lastPlatform)
+                    lastPlatform.OnPlayerJumpOnPlatform();// Сообщаем платформе о контакте
                 return isGrounded;
             }
         }
