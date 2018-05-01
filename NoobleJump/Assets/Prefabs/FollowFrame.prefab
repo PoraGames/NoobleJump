@@ -269,6 +269,8 @@ MonoBehaviour:
   followXAxis: 0
   followYAxis: 1
   followZAxis: 0
+  followingType: 1
+  deltaPos: {x: 0, y: -3.5, z: 0}
 --- !u!124 &124321484705704632
 Behaviour:
   m_ObjectHideFlags: 1
