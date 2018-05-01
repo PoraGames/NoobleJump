@@ -152,6 +152,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1202159183684454, guid: 1a9de71cd5e198a4689a867fc9f21004, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1577725955494882426, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 50819406731812604, guid: 1a9de71cd5e198a4689a867fc9f21004,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114856293401508826, guid: 1a9de71cd5e198a4689a867fc9f21004,
+        type: 2}
+      propertyPath: horisontalSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a9de71cd5e198a4689a867fc9f21004, type: 2}
   m_IsPrefabParent: 0

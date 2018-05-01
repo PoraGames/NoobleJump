@@ -23,7 +23,7 @@ GameObject:
   m_Layer: 0
   m_Name: groundCheckPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1577725955494882426, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58530483630231710
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -172,7 +172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   powerJump: 25
-  horisontalSpeed: 5
+  horisontalSpeed: 10
 --- !u!212 &212267223503915958
 SpriteRenderer:
   m_ObjectHideFlags: 1
