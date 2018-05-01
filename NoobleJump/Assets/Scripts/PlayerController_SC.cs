@@ -18,7 +18,10 @@ public class PlayerController_SC : Unit_SC
     void Update()
     {
         InputReader();
+    }
 
+    void FixedUpdate()
+    {
         if (GroundCheck())
             Jump();
     }
