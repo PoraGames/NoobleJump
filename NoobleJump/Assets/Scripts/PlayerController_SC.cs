@@ -29,7 +29,17 @@ public class PlayerController_SC : Unit_SC
     /// </summary>
     private void InputReader()
     {
+        float _coeff = 0;
+        if (Input.GetKey(KeyCode.D))
+            _coeff += 1;
+        if (Input.GetKey(KeyCode.A))
+            _coeff -= 1;
+        Move(_coeff);
+    }
 
+    private void Move(float moveCoeff)
+    {
+        rb.velocity = new Vector2(horisontalSpeed * moveCoeff, rb.velocity.y);
     }
 
     private void Jump()
