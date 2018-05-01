@@ -30,7 +30,7 @@ public class Unit_SC : MonoBehaviour
     /// </summary>
     public virtual void Kill()
     {
-
+        Debug.Log(name + " killed");
     }
 
     protected bool GroundCheck()
