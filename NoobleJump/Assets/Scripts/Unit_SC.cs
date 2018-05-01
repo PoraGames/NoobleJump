@@ -45,4 +45,13 @@ public class Unit_SC : MonoBehaviour
         isGrounded = false;
         return isGrounded;
     }
+
+    private void OnDrawGizmos()
+    {
+        foreach (Transform point in groundCheckPoints)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(point.position, groundCheckRadius);
+        }
+    }
 }
