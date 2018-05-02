@@ -7,23 +7,33 @@ public class PlayerController_SC : Unit_SC
     public float powerJump = 5f;
     public float horisontalSpeed = 2f;
 
+    private float lastJumpTimer = 0f;
+    private bool inJump = false;
     private Rigidbody2D rb;
+    private Animator anim;
 
     #region Unity selection
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        if (lastJumpTimer <= 9999f)
+            lastJumpTimer += Time.deltaTime;
+
         InputReader();
     }
 
     void FixedUpdate()
     {
-        if (GroundCheck() && rb.velocity.y <= 0.01f)
-            Jump();
+        if (GroundCheck() && rb.velocity.y <= 0.01f && !inJump && lastJumpTimer >= 0.2f)
+        {
+            inJump = true;
+            anim.Play("Jump");
+        }
     }
     #endregion
 
@@ -33,10 +43,15 @@ public class PlayerController_SC : Unit_SC
     private void InputReader()
     {
         float _coeff = 0;
-        if (Input.GetKey(KeyCode.D))
-            _coeff += 1;
-        if (Input.GetKey(KeyCode.A))
-            _coeff -= 1;
+
+        if (!inJump)
+        {
+            if (Input.GetKey(KeyCode.D))
+                _coeff += 1;
+            if (Input.GetKey(KeyCode.A))
+                _coeff -= 1;
+        }
+
         Move(_coeff);
     }
 
@@ -50,8 +65,10 @@ public class PlayerController_SC : Unit_SC
         rb.velocity = new Vector2(horisontalSpeed * moveCoeff, rb.velocity.y);
     }
 
-    private void Jump()
+    public void Jump()
     {
+        inJump = false;
+        lastJumpTimer = 0f;
         rb.velocity = new Vector2(rb.velocity.x, powerJump);
     }
 }
