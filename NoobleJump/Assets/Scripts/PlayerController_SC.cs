@@ -42,6 +42,11 @@ public class PlayerController_SC : Unit_SC
 
     private void Move(float moveCoeff)
     {
+        // Отражение по осям (поворот)
+        if (moveCoeff != 0)
+            transform.localScale = new Vector3(1 * Mathf.Sign(moveCoeff), 1, 1);
+
+        // Физика прыжка
         rb.velocity = new Vector2(horisontalSpeed * moveCoeff, rb.velocity.y);
     }
 
