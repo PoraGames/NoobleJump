@@ -7,7 +7,7 @@ using UnityEditor;
 public class EFSChanger_SC : MonoBehaviour
 {
     public bool needCheck = false;
-    public EFS_SC[] etalons;
+    public GameObject[] etalons;
 
     public GameObject[] objectsForCheck;
 
@@ -18,9 +18,13 @@ public class EFSChanger_SC : MonoBehaviour
 
         // Перенос всех образцов в словарь
         Dictionary<int, EFS_SC> etalonsDic = new Dictionary<int, EFS_SC>();
-        foreach (EFS_SC efs in etalons)
+        foreach (GameObject obj in etalons)
         {
-            etalonsDic.Add(efs.id, efs);
+            EFS_SC efs = obj.GetComponent<EFS_SC>() ?? obj.GetComponentInParent<EFS_SC>();
+            if (efs)
+                etalonsDic.Add(efs.id, efs);
+            else
+                Debug.LogError("error in etalons : " + obj.name);
         }
 
         // Замена объектов во всех группах
@@ -30,9 +34,8 @@ public class EFSChanger_SC : MonoBehaviour
             {
                 if (etalonsDic.ContainsKey(efs.id))
                 {
-
-                    GameObject newObject = Instantiate(etalonsDic[efs.id].gameObject, efs.transform.position,
-                        efs.transform.rotation);
+                    GameObject newObject = Instantiate(etalonsDic[efs.id].gameObject,
+                        efs.transform.position, efs.transform.rotation);
                     newObject.transform.SetParent(efs.transform.parent);
 
                     DestroyImmediate(efs.gameObject);
