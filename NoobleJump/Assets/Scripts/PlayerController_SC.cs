@@ -22,7 +22,7 @@ public class PlayerController_SC : Unit_SC
 
     void FixedUpdate()
     {
-        if (GroundCheck())
+        if (GroundCheck() && rb.velocity.y <= 0.01f)
             Jump();
     }
     #endregion
