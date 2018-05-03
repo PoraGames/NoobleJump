@@ -663,8 +663,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needCheck: 0
-  etalons: []
-  objectsForCheck: []
+  etalons:
+  - {fileID: 0}
+  objectsForCheck:
+  - {fileID: 0}
 --- !u!4 &1782006406
 Transform:
   m_ObjectHideFlags: 0

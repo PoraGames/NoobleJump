@@ -34,6 +34,14 @@ public class PlayerController_SC : Unit_SC
             inJump = true;
             anim.Play("Jump");
         }
+
+        // Если уже нет земли под ногами, а прыжок заряжается -> сбросить анимацию прыжка
+        if (!isGrounded && inJump)
+        {
+            inJump = false;
+            anim.Play("idle");
+            Debug.Log("jump reset");
+        }
     }
     #endregion
 

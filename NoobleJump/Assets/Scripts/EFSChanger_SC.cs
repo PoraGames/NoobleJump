@@ -20,7 +20,7 @@ public class EFSChanger_SC : MonoBehaviour
         Dictionary<int, EFS_SC> etalonsDic = new Dictionary<int, EFS_SC>();
         foreach (GameObject obj in etalons)
         {
-            EFS_SC efs = obj.GetComponent<EFS_SC>() ?? obj.GetComponentInParent<EFS_SC>();
+            EFS_SC efs = obj.GetComponent<EFS_SC>() ?? obj.GetComponentInChildren<EFS_SC>();
             if (efs)
                 etalonsDic.Add(efs.id, efs);
             else
