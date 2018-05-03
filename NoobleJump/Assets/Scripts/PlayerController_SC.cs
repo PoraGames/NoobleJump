@@ -6,12 +6,14 @@ public class PlayerController_SC : Unit_SC
 {
     public float powerJump = 5f;
     public float horisontalSpeed = 2f;
+    public Animator killAnim;
 
-    private float lastJumpTimer = 0f;
-    private bool inJump = false;
     private Rigidbody2D rb;
     private Animator anim;
     private MapBuilder_SC mainMapBuilderSc;
+
+    private float lastJumpTimer = 0f;
+    private bool inJump = false;
 
     #region Unity selection
     void Awake()
@@ -55,7 +57,7 @@ public class PlayerController_SC : Unit_SC
     {
         float _coeff = 0;
 
-        if (!inJump)
+        if (!inJump && !isUnderGameControl)
         {
             if (Input.GetKey(KeyCode.D))
                 _coeff += 1;
@@ -85,6 +87,22 @@ public class PlayerController_SC : Unit_SC
 
     public override void Kill()
     {
+        killAnim.Play("kill");
+        Invoke("RespawnPlayer", 1f);
+        SetUnderGameControlState(true);
+    }
+
+    void RespawnPlayer()
+    {
         mainMapBuilderSc.RespawnPlayer();
+        killAnim.Play("idle");// Убрать эффект смерти с персонажа
+        SetUnderGameControlState(false);
+    }
+
+    public override void SetUnderGameControlState(bool newState)
+    {
+        base.SetUnderGameControlState(newState);
+        rb.velocity = Vector2.zero;
+        rb.simulated = !newState;
     }
 }

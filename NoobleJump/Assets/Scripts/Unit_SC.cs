@@ -25,6 +25,9 @@ public class Unit_SC : MonoBehaviour
 
     public Platform_SC lastPlatform;
 
+    /// <summary> Находится под контролем игры </summary>
+    protected bool isUnderGameControl = false;
+
     /// <summary>
     /// Уничтожить этого юнита
     /// </summary>
@@ -59,5 +62,10 @@ public class Unit_SC : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(point.position, groundCheckRadius);
         }
+    }
+
+    public virtual void SetUnderGameControlState(bool newState)
+    {
+        isUnderGameControl = newState;
     }
 }
