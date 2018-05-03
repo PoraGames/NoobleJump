@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Boo.Lang;
 
 public class MapBuilder_SC : MonoBehaviour
 {
@@ -9,15 +10,35 @@ public class MapBuilder_SC : MonoBehaviour
 
     public Block_SC[] blocksForBuild;
 
+    /// <summary> Где возродится ели умрет прямо сейчас </summary>
+    public Transform currentRespawnPoint;
+    /// <summary> Следующие точки респа ([0] всегда ближайшая)</summary>
+    public List<Transform> nextRespawnPoints = new List<Transform>();
+
     private void Update()
     {
         if (CheckTheNeedToCreate())
             CreateNewBlock();
+
+        CheckNextRespawnPoint();
     }
 
     bool CheckTheNeedToCreate()
     {
         return playerPoint.position.y >= reactPoint.position.y;
+    }
+
+    /// <summary>
+    /// Проверить дошли ли до следующей точки респауна,
+    /// если да -> обновить точку респауна
+    /// </summary>
+    void CheckNextRespawnPoint()
+    {
+        if (playerPoint.position.y >= nextRespawnPoints[0].position.y)
+        {
+            currentRespawnPoint.position = nextRespawnPoints[0].position;// Переместить главную точку респауна
+            nextRespawnPoints.RemoveAt(0);// Убрать точку из массива (теперь новая след точка в позиции [0])
+        }
     }
 
     void CreateNewBlock()
@@ -32,6 +53,13 @@ public class MapBuilder_SC : MonoBehaviour
         // Перемещение точек создания и ожидания
         reactPoint.position += Vector3.up * (_createdBlock.positionForCreatePoint.position.y - createPoint.position.y);
         createPoint.position = _createdBlock.positionForCreatePoint.position;
+
+        // Новая точка респауна, если нужно
+        if (_createdBlock.respawnPoints.Length > 0)
+        {
+            // TODO: Пока берем только одну, потом можно пересмотреть
+            nextRespawnPoints.Add(_createdBlock.respawnPoints[0]);
+        }
     }
 
     /// <summary>

@@ -7,4 +7,5 @@ using System.Collections;
 public class Block_SC : MonoBehaviour
 {
     public Transform positionForCreatePoint;
+    public Transform[] respawnPoints;
 }
