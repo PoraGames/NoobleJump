@@ -10,6 +10,8 @@ public class MapBuilder_SC : MonoBehaviour
 
     public Block_SC[] blocksForBuild;
 
+    public Transform rootForAllGeneratedMap;
+
     /// <summary> Где возродится ели умрет прямо сейчас </summary>
     public Transform currentRespawnPoint;
     /// <summary> Следующие точки респа ([0] всегда ближайшая)</summary>
@@ -34,6 +36,9 @@ public class MapBuilder_SC : MonoBehaviour
     /// </summary>
     void CheckNextRespawnPoint()
     {
+        if (nextRespawnPoints.Count == 0)
+            return;
+
         if (playerPoint.position.y >= nextRespawnPoints[0].position.y)
         {
             currentRespawnPoint.position = nextRespawnPoints[0].position;// Переместить главную точку респауна
@@ -46,8 +51,8 @@ public class MapBuilder_SC : MonoBehaviour
         // Выбор блока для создания
         GameObject _generatedObj = GenerateBlockForCreating().gameObject;
 
-        // Создание
-        GameObject _createdObj = Instantiate(_generatedObj, createPoint.position, Quaternion.identity);
+        // Создание (дочерним объектом для держателя карты)
+        GameObject _createdObj = Instantiate(_generatedObj, createPoint.position, Quaternion.identity, rootForAllGeneratedMap);
         Block_SC _createdBlock = _createdObj.GetComponent<Block_SC>();
 
         // Перемещение точек создания и ожидания

@@ -620,7 +620,8 @@ MonoBehaviour:
   playerPoint: {fileID: 932501815}
   blocksForBuild:
   - {fileID: 114314901323565452, guid: 88acba89f53397b469b9debf9f8012e4, type: 2}
-  currentRespawnPoint: {fileID: 0}
+  rootForAllGeneratedMap: {fileID: 1229432671}
+  currentRespawnPoint: {fileID: 392507165}
 --- !u!4 &784191141
 Transform:
   m_ObjectHideFlags: 0
@@ -844,6 +845,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4488086798234354, guid: 019d39d55c0a77644b514a8564e2c1aa,
     type: 2}
   m_PrefabInternal: {fileID: 847478719}
+--- !u!1 &1229432670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1229432671}
+  m_Layer: 0
+  m_Name: AllGeneratedMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1229432671
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1229432670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.88993555, y: 5.7215123, z: -0.734375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1312664099
 Prefab:
   m_ObjectHideFlags: 0
