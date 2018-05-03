@@ -80,4 +80,9 @@ public class MapBuilder_SC : MonoBehaviour
 
         return _block;
     }
+
+    public void RespawnPlayer()
+    {
+        playerPoint.position = currentRespawnPoint.position;// Перемещение игрока
+    }
 }

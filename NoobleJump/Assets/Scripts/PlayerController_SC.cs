@@ -11,12 +11,14 @@ public class PlayerController_SC : Unit_SC
     private bool inJump = false;
     private Rigidbody2D rb;
     private Animator anim;
+    private MapBuilder_SC mainMapBuilderSc;
 
     #region Unity selection
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        mainMapBuilderSc = FindObjectOfType<MapBuilder_SC>();
     }
 
     void Update()
@@ -79,5 +81,10 @@ public class PlayerController_SC : Unit_SC
         inJump = false;
         lastJumpTimer = 0f;
         rb.velocity = new Vector2(rb.velocity.x, powerJump);
+    }
+
+    public override void Kill()
+    {
+        mainMapBuilderSc.RespawnPlayer();
     }
 }

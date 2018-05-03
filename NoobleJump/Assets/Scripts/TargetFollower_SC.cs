@@ -20,6 +20,15 @@ public class TargetFollower_SC : MonoBehaviour
     public FollowingType followingType = FollowingType.standart;
 
     public Vector3 deltaPos;
+    [Header("Дистанция перемещения расцениваемая как телепортация")]
+    public float distanseForTeleportReact = 0.2f;
+
+    private Vector3 lastCheckedTargetPosition;
+
+    private void Start()
+    {
+        lastCheckedTargetPosition = targetTransform.position;// Запоминаем позицию цели
+    }
 
     //void Awake()
     //{
@@ -33,13 +42,15 @@ public class TargetFollower_SC : MonoBehaviour
     //        deltaPos += Vector3.forward * (transform.position.z - targetTransform.position.z);
     //}
 
+
+
     void FixedUpdate()
     {
         float _curX = followXAxis ? targetTransform.position.x + deltaPos.x : transform.position.x;
         float _curY = followYAxis ? targetTransform.position.y + deltaPos.y : transform.position.y;
         float _curZ = followZAxis ? targetTransform.position.z + deltaPos.z : transform.position.z;
 
-        if (followingType == FollowingType.catching)
+        if (followingType == FollowingType.catching && !IsTargetTeleported())// Если цель телепортировалась, то в любом моде провести синхронизацию
         {
             if (_curX < transform.position.x)
                 _curX = transform.position.x;
@@ -50,5 +61,23 @@ public class TargetFollower_SC : MonoBehaviour
         }
 
         transform.position = new Vector3(_curX, _curY, _curZ);
+    }
+
+    /// <summary>
+    /// Проверка на внезапное резкое перемещение цели и корректировка последней позиции
+    /// </summary>
+    /// <returns></returns>
+    bool IsTargetTeleported()
+    {
+        if (Vector3.Distance(lastCheckedTargetPosition, targetTransform.position) >= distanseForTeleportReact)
+        {
+            // Обнаружена телепортация
+            lastCheckedTargetPosition = targetTransform.position;
+            return true;
+        }
+
+        // Все ОК, телепортация не обнаружена
+        lastCheckedTargetPosition = targetTransform.position;
+        return false;
     }
 }
