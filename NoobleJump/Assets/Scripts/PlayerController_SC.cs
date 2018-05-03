@@ -21,7 +21,7 @@ public class PlayerController_SC : Unit_SC
 
     void Update()
     {
-        if (lastJumpTimer <= 9999f)
+        if (lastJumpTimer <= 9999f)// Во избежании переполнения (просто подстраховка)
             lastJumpTimer += Time.deltaTime;
 
         InputReader();
@@ -40,6 +40,7 @@ public class PlayerController_SC : Unit_SC
         {
             inJump = false;
             anim.Play("idle");
+
             Debug.Log("jump reset");
         }
     }
