@@ -56,8 +56,9 @@ public class MapBuilder_SC : MonoBehaviour
         Block_SC _createdBlock = _createdObj.GetComponent<Block_SC>();
 
         // Перемещение точек создания и ожидания
-        reactPoint.position += Vector3.up * (_createdBlock.positionForCreatePoint.position.y - createPoint.position.y);
-        createPoint.position = _createdBlock.positionForCreatePoint.position;
+        float deltaY = _createdBlock.positionForCreatePoint.position.y - createPoint.position.y;
+        reactPoint.position += Vector3.up * deltaY;
+        createPoint.position += Vector3.up * deltaY;
 
         // Новая точка респауна, если нужно
         if (_createdBlock.respawnPoints.Length > 0)
