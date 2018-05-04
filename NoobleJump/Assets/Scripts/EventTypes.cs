@@ -6,6 +6,10 @@ public enum EventId
     unknown = 0,
 
     playerKilled,
+    playerRespawned,
+
+    gamePaused,
+    gameContinue,
 }
 
 public class EventInfo
