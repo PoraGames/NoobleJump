@@ -6,7 +6,9 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class EFSChanger_SC : MonoBehaviour
 {
+    [Header("Поставить галку для выполнения")]
     public bool needCheck = false;
+
     public GameObject[] etalons;
 
     public GameObject[] objectsForCheck;
