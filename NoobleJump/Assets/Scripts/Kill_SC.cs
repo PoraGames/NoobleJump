@@ -11,7 +11,7 @@ public class Kill_SC : MonoBehaviour
             _unitSc.Kill();
     }
 
-    private void Start()
+    private void Awake()
     {
         Dispatcher_SC.Subscribe(EventId.playerKilled, ReactOnKill);
     }

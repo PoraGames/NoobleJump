@@ -9,43 +9,14 @@ public enum EventId
     playerKilled = 1,
 }
 
-public class EventInfo
-{
-    public string name;
-    public int firstValue;
-
-    public EventInfo(string _name, int _firstValue)
-    {
-        name = _name;
-        firstValue = _firstValue;
-    }
-}
-
 public class Dispatcher_SC : MonoBehaviour
 {
     private const int PRIORITY_COUNT = 5;
 
     public delegate void EventSubscribeHandler(EventId id, EventInfo info);
 
-    private static Dictionary<int, List<EventSubscribeHandler>> handlers;
-    private static Dispatcher_SC instance;
-
-    public static bool HasInstance
-    {
-        get { return instance != null; }
-    }
-
-    void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(this);
-            return;
-        }
-        instance = this;
-
-        handlers = new Dictionary<int, List<EventSubscribeHandler>>(32);
-    }
+    private static Dictionary<int, List<EventSubscribeHandler>> handlers =
+        new Dictionary<int, List<EventSubscribeHandler>>();
 
     public static void Subscribe(EventId id, EventSubscribeHandler handler)
     {
@@ -82,5 +53,17 @@ public class Dispatcher_SC : MonoBehaviour
         {
             subscription.Invoke(id, info);
         }
+    }
+}
+
+public class EventInfo
+{
+    public string name;
+    public int firstValue;
+
+    public EventInfo(string _name, int _firstValue)
+    {
+        name = _name;
+        firstValue = _firstValue;
     }
 }
