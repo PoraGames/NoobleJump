@@ -90,6 +90,8 @@ public class PlayerController_SC : Unit_SC
         killAnim.Play("kill");
         Invoke("RespawnPlayer", 1f);
         SetUnderGameControlState(true);
+
+        Dispatcher_SC.Send(EventId.playerKilled, new EventInfo("killer", 1));
     }
 
     void RespawnPlayer()

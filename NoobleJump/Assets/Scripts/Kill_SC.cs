@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Kill_SC : MonoBehaviour
 {
@@ -8,5 +9,20 @@ public class Kill_SC : MonoBehaviour
         Unit_SC _unitSc = collision.transform.GetComponent<Unit_SC>();
         if (_unitSc)
             _unitSc.Kill();
+    }
+
+    private void Start()
+    {
+        Dispatcher_SC.Subscribe(EventId.playerKilled, ReactOnKill);
+    }
+
+    private void OnDestroy()
+    {
+        Dispatcher_SC.Unsubscribe(EventId.playerKilled, ReactOnKill);
+    }
+
+    public void ReactOnKill(EventId id, EventInfo info)
+    {
+        Debug.Log("ReactOnKill");
     }
 }
