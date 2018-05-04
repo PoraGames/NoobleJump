@@ -1513,11 +1513,6 @@ Prefab:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 932501815}
-    - target: {fileID: 20976224745998570, guid: 416bdef68fd59fa48a301e35196525f3,
-        type: 2}
-      propertyPath: m_Depth
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 416bdef68fd59fa48a301e35196525f3, type: 2}
   m_IsPrefabParent: 0
