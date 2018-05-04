@@ -9,12 +9,19 @@ public enum EventId
     playerKilled = 1,
 }
 
+/// <summary>
+/// Обработчик всех событий в игре
+/// </summary>
 public class Dispatcher_SC : MonoBehaviour
 {
-    private const int PRIORITY_COUNT = 5;
-
+    /// <summary>
+    /// Формат сообщений событий
+    /// </summary>
+    /// <param name="id"> id события  </param>
+    /// <param name="info"> передаваемая информация </param>
     public delegate void EventSubscribeHandler(EventId id, EventInfo info);
 
+    /// <summary> Все подписчики </summary>
     private static Dictionary<int, List<EventSubscribeHandler>> handlers =
         new Dictionary<int, List<EventSubscribeHandler>>();
 
@@ -42,6 +49,7 @@ public class Dispatcher_SC : MonoBehaviour
         subscriptions.Remove(handler);
     }
 
+    /// <summary> Сообщить о событии </summary>
     public static void Send(EventId id, EventInfo info)
     {
         List<EventSubscribeHandler> subscriptions;
