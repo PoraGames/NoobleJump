@@ -2,13 +2,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public enum EventId
-{
-    unknown = 0,
-
-    playerKilled = 1,
-}
-
 /// <summary>
 /// Обработчик всех событий в игре
 /// </summary>
@@ -61,17 +54,5 @@ public class Dispatcher_SC : MonoBehaviour
         {
             subscription.Invoke(id, info);
         }
-    }
-}
-
-public class EventInfo
-{
-    public string name;
-    public int firstValue;
-
-    public EventInfo(string _name, int _firstValue)
-    {
-        name = _name;
-        firstValue = _firstValue;
     }
 }
