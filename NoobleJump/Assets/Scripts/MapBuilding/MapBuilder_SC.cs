@@ -55,7 +55,7 @@ public class MapBuilder_SC : MonoBehaviour
         GameObject _createdObj = Instantiate(_generatedObj, createPoint.position, Quaternion.identity, rootForAllGeneratedMap);
         Block_SC _createdBlock = _createdObj.GetComponent<Block_SC>();
 
-        // Перемещение точек создания и ожидания
+        // Перемещение точек создания и ожидания ТОЛЬКО ПО ВЕРТИКАЛИ
         float deltaY = _createdBlock.positionForCreatePoint.position.y - createPoint.position.y;
         reactPoint.position += Vector3.up * deltaY;
         createPoint.position += Vector3.up * deltaY;

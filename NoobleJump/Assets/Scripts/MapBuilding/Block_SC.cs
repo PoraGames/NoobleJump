@@ -8,4 +8,7 @@ public class Block_SC : MonoBehaviour
 {
     public Transform positionForCreatePoint;
     public Transform[] respawnPoints;
+
+    public Transform leftEnd;
+    public Transform rightEnd;
 }
