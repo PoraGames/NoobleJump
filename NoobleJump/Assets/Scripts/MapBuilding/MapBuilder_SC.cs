@@ -17,6 +17,8 @@ public class MapBuilder_SC : MonoBehaviour
     /// <summary> Следующие точки респа ([0] всегда ближайшая)</summary>
     public List<Transform> nextRespawnPoints = new List<Transform>();
 
+    public Block_SC currentLastBlock;
+
     private void Update()
     {
         if (CheckTheNeedToCreate())
@@ -48,12 +50,17 @@ public class MapBuilder_SC : MonoBehaviour
 
     void CreateNewBlock()
     {
+        float horShift = 0;
+
         // Выбор блока для создания
-        GameObject _generatedObj = GenerateBlockForCreating().gameObject;
+        GameObject _generatedObj = GenerateBlockForCreating(out horShift).gameObject;
 
         // Создание (дочерним объектом для держателя карты)
         GameObject _createdObj = Instantiate(_generatedObj, createPoint.position, Quaternion.identity, rootForAllGeneratedMap);
         Block_SC _createdBlock = _createdObj.GetComponent<Block_SC>();
+
+        // Сдвиг по горизонтали
+        _createdBlock.horShifter.position += Vector3.right * horShift;
 
         // Перемещение точек создания и ожидания ТОЛЬКО ПО ВЕРТИКАЛИ
         float deltaY = _createdBlock.positionForCreatePoint.position.y - createPoint.position.y;
@@ -72,12 +79,86 @@ public class MapBuilder_SC : MonoBehaviour
     /// Выбор блока для создания
     /// <para> Все проверки идут внутри </para>
     /// </summary>
+    /// <param name="horisontalShift"> сгенерированный сдвиг блока по горизонтали, который нужно будет сделать после создания </param>
     /// <returns> Уже готовый к созданию блок </returns>
-    Block_SC GenerateBlockForCreating()
+    Block_SC GenerateBlockForCreating(out float horisontalShift)
     {
-        Block_SC _block = blocksForBuild[Random.Range(0, blocksForBuild.Length)];
+        int changeTryCounter = 0;
+        Block_SC _block;
+        bool isBlockCorrect = false;
 
-        // TODO: место для проверок
+        float time0Right;
+        float time12Right;
+        bool isRightSideCorrect;
+        float time0Left;
+        float time12Left;
+        bool isLeftSideCorrect;
+
+        do
+        {
+            // Достаем случайный блок
+            _block = blocksForBuild[Random.Range(0, blocksForBuild.Length)];
+
+            // TODO: другие проверки
+
+            #region Проверка на совместимость связующих блоков погоризонтальным позициям блоков
+            // Вычисление локальной позиции по X
+            // правого края выходной платформы последнего созданного блока,
+            // относительно трансформа последнего созданного блока
+            time0Right = currentLastBlock.transform
+                .InverseTransformPoint(currentLastBlock.outPlatform.rightEnd.transform.position).x;
+
+            // Вычисление локальной позиции по X
+            // левого края входной платформы сгенерированного блока-претендента,
+            // относительно трансформа блока-претендента 
+            time12Right = _block.transform.InverseTransformPoint(_block.inPlatform.leftEnd.position).x;
+
+            // Можно ли вставить справа
+            isRightSideCorrect =
+                (time12Right + _block.rightGap > time0Right &&
+                 time12Right - _block.leftGap <= time0Right);
+
+            // То же самое (только зеркально) для проверки возможности вставки слева
+            time0Left = currentLastBlock.transform
+                .InverseTransformPoint(currentLastBlock.outPlatform.leftEnd.transform.position).x;
+            time12Left = _block.transform.InverseTransformPoint(_block.inPlatform.rightEnd.position).x;
+
+            // Можно ли вставить справа
+            isLeftSideCorrect =
+                (time12Left - _block.leftGap < time0Left &&
+                 time12Left + _block.rightGap >= time0Left);
+            #endregion
+
+            // Во избежании зацикливания
+            // TODO: сделать заглушку по умолчанию
+            if (++changeTryCounter > 25)
+            {
+                Debug.LogError("Correct block do not found");
+                isLeftSideCorrect = true;
+            }
+        } while (!(isLeftSideCorrect || isRightSideCorrect));
+
+        //  Далее: Если блок подходит
+
+        // Выбор стороны генерации и точного сдвига
+
+        // Выбор стороны
+        // TODO: Можно добавить процентную вероятность, основанную на отношении размеров диапозона с каждой стороны (сейчас 50 \ 50)
+        if (isLeftSideCorrect && isRightSideCorrect)
+        {
+            isLeftSideCorrect = Random.Range(0, 2) == 1;
+            isRightSideCorrect = !isLeftSideCorrect;
+        }
+
+        // Выбор сдвига
+        if (isLeftSideCorrect)
+        {
+            horisontalShift = Random.Range((time12Left - _block.leftGap) - time0Left, 0f);
+        }
+        else
+        {
+            horisontalShift = Random.Range(0f, (time12Right + _block.rightGap) - time0Right);
+        }
 
         return _block;
     }
