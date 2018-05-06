@@ -4,10 +4,12 @@ using Boo.Lang;
 
 public class MapBuilder_SC : MonoBehaviour
 {
-    /// <summary>
-    /// Максимальное отдаление краев связывающих блоки платформ
-    /// </summary>
-    private const float maxDeltaXGenerate = 4f;
+    [Header("Параметры генерации блоков")]
+    /// <summary> Максимальное отдаление краев связывающих блоки платформ </summary>
+    public float maxDeltaXGenerate = 4f;
+    /// <summary> Стандартный отступ при генерации нового блока относительно out платформы </summary>
+    public float deltaYGenerate = 3f;
+    [Space(20)]
 
     public Transform reactPoint;
     public Transform createPoint;
@@ -26,6 +28,8 @@ public class MapBuilder_SC : MonoBehaviour
 
     private void Update()
     {
+        // За один Update создается только один блок
+        // TODO: Можно разделить генерацию + создание + активация блока на несколько частей и вызывать в разных Update
         if (CheckTheNeedToCreate())
             CreateNewBlock();
 
@@ -71,9 +75,20 @@ public class MapBuilder_SC : MonoBehaviour
         currentLastBlock = _createdBlock;
 
         // Перемещение точек создания и ожидания ТОЛЬКО ПО ВЕРТИКАЛИ
-        float deltaY = _createdBlock.positionForCreatePoint.position.y - createPoint.position.y;
-        reactPoint.position += Vector3.up * deltaY;
-        createPoint.position += Vector3.up * deltaY;
+
+        // Если есть своя точка для отступа, то отталкиваемся от нее
+        if (_createdBlock.positionForCreatePoint)
+        {
+            float deltaY = _createdBlock.positionForCreatePoint.position.y - createPoint.position.y;
+            reactPoint.position += Vector3.up * deltaY;
+            createPoint.position += Vector3.up * deltaY;
+        }
+        // Если нет, то берем дефолтное значение из настроек
+        else
+        {
+            reactPoint.position += Vector3.up * deltaYGenerate;
+            createPoint.position += Vector3.up * deltaYGenerate;
+        }
 
         // Новая точка респауна, если нужно
         if (_createdBlock.respawnPoints.Length > 0)
