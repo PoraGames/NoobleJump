@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4418502972177904}
   - component: {fileID: 95660097608851388}
   - component: {fileID: 58751717249193418}
+  - component: {fileID: 114093378588800700}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Untagged
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1746289767858234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.12, y: -3.52, z: 0}
+  m_LocalPosition: {x: -2.3648791, y: -3.111763, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4667254077249038}
@@ -103,6 +104,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114093378588800700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746289767858234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287b1d7476321c94f87424c175bca82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  value: 1
 --- !u!212 &212476047925579174
 SpriteRenderer:
   m_ObjectHideFlags: 1

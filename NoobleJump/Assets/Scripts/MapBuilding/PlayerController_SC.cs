@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController_SC : Unit_SC
 {
     public float powerJump = 5f;
     public float horisontalSpeed = 2f;
     public Animator killAnim;
+    public float score = 0;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -106,5 +108,17 @@ public class PlayerController_SC : Unit_SC
         base.SetUnderGameControlState(newState);
         rb.velocity = Vector2.zero;
         rb.simulated = !newState;
+    }
+
+    public void AddHealth(int healthQuantity)
+    {
+        health += healthQuantity;
+        Dispatcher_SC.Send(EventId.gameInterfaceNeedUpdate, new EventInfo());
+    }
+
+    public void AddScore(int scoreQuantity)
+    {
+        score += scoreQuantity;
+        Dispatcher_SC.Send(EventId.gameInterfaceNeedUpdate, new EventInfo());
     }
 }

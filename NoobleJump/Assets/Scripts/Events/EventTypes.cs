@@ -10,12 +10,20 @@ public enum EventId
 
     gamePaused,
     gameContinue,
+
+    gameInterfaceNeedUpdate,
 }
 
 public class EventInfo
 {
     public string name;
     public int firstValue;
+
+    public EventInfo()
+    {
+        name = "unknown";
+        firstValue = 0;
+    }
 
     public EventInfo(string _name, int _firstValue)
     {

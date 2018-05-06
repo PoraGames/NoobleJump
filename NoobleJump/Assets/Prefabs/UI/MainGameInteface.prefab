@@ -87,6 +87,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224152059514435578}
+  - component: {fileID: 114508052233788840}
   m_Layer: 5
   m_Name: MainGameInteface
   m_TagString: Untagged
@@ -273,6 +274,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114508052233788840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417026777550656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66efa1b2566f72740b8c09b19240ab11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthT: {fileID: 114689879092464612}
+  scoreT: {fileID: 114210049416497062}
 --- !u!114 &114552587392034564
 MonoBehaviour:
   m_ObjectHideFlags: 1
