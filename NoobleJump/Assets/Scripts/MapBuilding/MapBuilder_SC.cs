@@ -7,7 +7,7 @@ public class MapBuilder_SC : MonoBehaviour
     /// <summary>
     /// Максимальное отдаление краев связывающих блоки платформ
     /// </summary>
-    private const float maxDeltaXGenerate = 2f;
+    private const float maxDeltaXGenerate = 4f;
 
     public Transform reactPoint;
     public Transform createPoint;
