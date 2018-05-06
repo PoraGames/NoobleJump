@@ -4,6 +4,11 @@ using Boo.Lang;
 
 public class MapBuilder_SC : MonoBehaviour
 {
+    /// <summary>
+    /// Максимальное отдаление краев связывающих блоки платформ
+    /// </summary>
+    private const float maxDeltaXGenerate = 2f;
+
     public Transform reactPoint;
     public Transform createPoint;
     public Transform playerPoint;
@@ -61,6 +66,9 @@ public class MapBuilder_SC : MonoBehaviour
 
         // Сдвиг по горизонтали
         _createdBlock.horShifter.position += Vector3.right * horShift;
+
+        // Запоминаем новый блок как последний
+        currentLastBlock = _createdBlock;
 
         // Перемещение точек создания и ожидания ТОЛЬКО ПО ВЕРТИКАЛИ
         float deltaY = _createdBlock.positionForCreatePoint.position.y - createPoint.position.y;
@@ -153,12 +161,25 @@ public class MapBuilder_SC : MonoBehaviour
         // Выбор сдвига
         if (isLeftSideCorrect)
         {
-            horisontalShift = Random.Range((time12Left - _block.leftGap) - time0Left, 0f);
+            float tmp = Random.Range((time12Left - _block.leftGap) - time0Left, 0f);
+
+            if (tmp < -maxDeltaXGenerate)// Соблюдение боковогого интервала
+                tmp = -maxDeltaXGenerate;
+
+            horisontalShift = time0Left + tmp - time12Left;
+            Debug.Log(time0Left);
         }
         else
         {
-            horisontalShift = Random.Range(0f, (time12Right + _block.rightGap) - time0Right);
+            float tmp = Random.Range(0f, (time12Right + _block.rightGap) - time0Right);
+
+            if (tmp > maxDeltaXGenerate)// Соблюдение боковогого интервала
+                tmp = maxDeltaXGenerate;
+
+            horisontalShift = time0Right + tmp - time12Right;
+            Debug.Log(time0Right);
         }
+        //Debug.Log(horisontalShift);
 
         return _block;
     }
