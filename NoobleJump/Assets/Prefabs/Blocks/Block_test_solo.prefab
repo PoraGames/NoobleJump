@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horShifter: {fileID: 4112066898026282}
-  positionForCreatePoint: {fileID: 4735096928775798}
+  positionForCreatePoint: {fileID: 0}
   respawnPoints:
   - {fileID: 4374704076546718}
   leftEnd: {fileID: 4673112991373064}

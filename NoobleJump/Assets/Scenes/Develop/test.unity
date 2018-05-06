@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303208381362c1943b791691d0a504f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDeltaXGenerate: 4
+  deltaYGenerate: 3.5
   reactPoint: {fileID: 844404991}
   createPoint: {fileID: 1625198132}
   playerPoint: {fileID: 932501815}
