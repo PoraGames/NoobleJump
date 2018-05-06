@@ -95,11 +95,11 @@ public class MapBuilder_SC : MonoBehaviour
         Block_SC _block;
         bool isBlockCorrect = false;
 
-        float time0Right;
-        float time12Right;
+        float outPlatformRightEndLocalPosX;
+        float inPlatformLeftEndPosX;
         bool isRightSideCorrect;
-        float time0Left;
-        float time12Left;
+        float outPlatformLeftEndLocalPosX;
+        float inPlatformRightEndPosX;
         bool isLeftSideCorrect;
 
         do
@@ -113,28 +113,28 @@ public class MapBuilder_SC : MonoBehaviour
             // Вычисление локальной позиции по X
             // правого края выходной платформы последнего созданного блока,
             // относительно трансформа последнего созданного блока
-            time0Right = currentLastBlock.transform
+            outPlatformRightEndLocalPosX = currentLastBlock.transform
                 .InverseTransformPoint(currentLastBlock.outPlatform.rightEnd.transform.position).x;
 
             // Вычисление локальной позиции по X
             // левого края входной платформы сгенерированного блока-претендента,
             // относительно трансформа блока-претендента 
-            time12Right = _block.transform.InverseTransformPoint(_block.inPlatform.leftEnd.position).x;
+            inPlatformLeftEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.leftEnd.position).x;
 
             // Можно ли вставить справа
             isRightSideCorrect =
-                (time12Right + _block.rightGap > time0Right &&
-                 time12Right - _block.leftGap <= time0Right);
+                (inPlatformLeftEndPosX + _block.rightGap > outPlatformRightEndLocalPosX &&
+                 inPlatformLeftEndPosX - _block.leftGap <= outPlatformRightEndLocalPosX);
 
             // То же самое (только зеркально) для проверки возможности вставки слева
-            time0Left = currentLastBlock.transform
+            outPlatformLeftEndLocalPosX = currentLastBlock.transform
                 .InverseTransformPoint(currentLastBlock.outPlatform.leftEnd.transform.position).x;
-            time12Left = _block.transform.InverseTransformPoint(_block.inPlatform.rightEnd.position).x;
+            inPlatformRightEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.rightEnd.position).x;
 
             // Можно ли вставить справа
             isLeftSideCorrect =
-                (time12Left - _block.leftGap < time0Left &&
-                 time12Left + _block.rightGap >= time0Left);
+                (inPlatformRightEndPosX - _block.leftGap < outPlatformLeftEndLocalPosX &&
+                 inPlatformRightEndPosX + _block.rightGap >= outPlatformLeftEndLocalPosX);
             #endregion
 
             // Во избежании зацикливания
@@ -148,8 +148,7 @@ public class MapBuilder_SC : MonoBehaviour
 
         //  Далее: Если блок подходит
 
-        // Выбор стороны генерации и точного сдвига
-
+        #region Выбор стороны генерации и точного сдвига
         // Выбор стороны
         // TODO: Можно добавить процентную вероятность, основанную на отношении размеров диапозона с каждой стороны (сейчас 50 \ 50)
         if (isLeftSideCorrect && isRightSideCorrect)
@@ -161,25 +160,21 @@ public class MapBuilder_SC : MonoBehaviour
         // Выбор сдвига
         if (isLeftSideCorrect)
         {
-            float tmp = Random.Range((time12Left - _block.leftGap) - time0Left, 0f);
+            float maxLeftShift = (inPlatformRightEndPosX - _block.leftGap) - outPlatformLeftEndLocalPosX;   // Вычисление возможного отступа
+            maxLeftShift = maxLeftShift < -maxDeltaXGenerate ? -maxDeltaXGenerate : maxLeftShift;           // Соблюдение боковогого интервала
+            float generatedShift = Random.Range(maxLeftShift, 0f);                                          // Генерация отступа
 
-            if (tmp < -maxDeltaXGenerate)// Соблюдение боковогого интервала
-                tmp = -maxDeltaXGenerate;
-
-            horisontalShift = time0Left + tmp - time12Left;
-            Debug.Log(time0Left);
+            horisontalShift = outPlatformLeftEndLocalPosX + generatedShift - inPlatformRightEndPosX;        // Сообщить о выбранном отступе
         }
         else
         {
-            float tmp = Random.Range(0f, (time12Right + _block.rightGap) - time0Right);
+            float maxRightShift = (inPlatformLeftEndPosX + _block.rightGap) - outPlatformRightEndLocalPosX; // Вычисление возможного отступа
+            maxRightShift = maxRightShift > maxDeltaXGenerate ? maxDeltaXGenerate : maxRightShift;          // Соблюдение боковогого интервала
+            float generatedShift = Random.Range(0f, maxRightShift);                                         // Генерация отступа
 
-            if (tmp > maxDeltaXGenerate)// Соблюдение боковогого интервала
-                tmp = maxDeltaXGenerate;
-
-            horisontalShift = time0Right + tmp - time12Right;
-            Debug.Log(time0Right);
+            horisontalShift = outPlatformRightEndLocalPosX + generatedShift - inPlatformLeftEndPosX;        // Применение отступа
         }
-        //Debug.Log(horisontalShift);
+        #endregion
 
         return _block;
     }
