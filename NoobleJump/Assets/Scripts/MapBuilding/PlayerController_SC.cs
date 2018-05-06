@@ -90,6 +90,10 @@ public class PlayerController_SC : Unit_SC
     public override void Kill()
     {
         killAnim.Play("kill");
+        // Отнять 1 здоровье
+        AddHealth(-1);
+        Dispatcher_SC.Send(EventId.gameInterfaceNeedUpdate, new EventInfo());
+
         Invoke("RespawnPlayer", 1f);
         SetUnderGameControlState(true);
 
