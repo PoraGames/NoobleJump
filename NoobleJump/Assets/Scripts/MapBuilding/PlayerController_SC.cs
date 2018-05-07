@@ -82,6 +82,9 @@ public class PlayerController_SC : Unit_SC
 
     public void Jump()
     {
+        if (!inJump)// Предотвращение случайных вызовов
+            return;
+
         inJump = false;
         lastJumpTimer = 0f;
         rb.velocity = new Vector2(rb.velocity.x, powerJump);
