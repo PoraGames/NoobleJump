@@ -32,6 +32,12 @@ public class MapBuilder_SC : MonoBehaviour
     private void Start()
     {
         Subscribe();
+
+        // Найти все стартовые блоки, чтоб потом их удалить не забыть
+        foreach (Block_SC block in FindObjectsOfType<Block_SC>())
+        {
+            allBlocks.Add(block.gameObject);
+        }
     }
 
     private void Update()
