@@ -16,7 +16,7 @@ public class Block_SC : MonoBehaviour
     public Transform horShifter;
     [Header("Для следующего блока")]
     public Transform positionForCreatePoint;
-    public Transform[] respawnPoints;
+    public RespawnPoint_SC respawnPoint;
 
     [Header("Края блока (влияют на возможность горизонтального сдвига)")]
     public Transform leftEnd;

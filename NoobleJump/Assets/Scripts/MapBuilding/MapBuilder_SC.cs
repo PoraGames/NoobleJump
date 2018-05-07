@@ -50,9 +50,11 @@ public class MapBuilder_SC : MonoBehaviour
         if (nextRespawnPoints.Count == 0)
             return;
 
-        if (playerPoint.position.y >= nextRespawnPoints[0].position.y)
+        // Если игрок выше точки респауна и недалеко от нее по горизонтали
+        if (playerPoint.position.y >= nextRespawnPoints[0].position.y && Mathf.Abs(playerPoint.position.x - nextRespawnPoints[0].position.x) < 1)
         {
             currentRespawnPoint.position = nextRespawnPoints[0].position;// Переместить главную точку респауна
+            nextRespawnPoints[0].GetComponent<RespawnPoint_SC>().Activate();
             nextRespawnPoints.RemoveAt(0);// Убрать точку из массива (теперь новая след точка в позиции [0])
         }
     }
@@ -91,10 +93,10 @@ public class MapBuilder_SC : MonoBehaviour
         }
 
         // Новая точка респауна, если нужно
-        if (_createdBlock.respawnPoints.Length > 0)
+        if (_createdBlock.respawnPoint != null)
         {
             // TODO: Пока берем только одну, потом можно пересмотреть
-            nextRespawnPoints.Add(_createdBlock.respawnPoints[0]);
+            nextRespawnPoints.Add(_createdBlock.respawnPoint.transform);
         }
     }
 
