@@ -25,13 +25,13 @@ public class RespawnPoint_SC : MonoBehaviour
         if (isActivate)
             return;
 
-        Dispatcher_SC.Send(EventId.newRespawnPoint, new EventInfo(pointForRespawn.position));
+        isActivate = true;
+
+        Dispatcher_SC.Send(EventId.newRespawnPoint, new EventInfo(pointForRespawn.position, gameObject));
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (!sr)
             sr = GetComponentInChildren<SpriteRenderer>();
         if (sr)
             sr.sprite = onSprite;
-
-        isActivate = true;
     }
 }

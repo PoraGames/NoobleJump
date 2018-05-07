@@ -9,6 +9,8 @@ public class MapBuilder_SC : MonoBehaviour
     public float maxDeltaXGenerate = 4f;
     /// <summary> Стандартный отступ при генерации нового блока относительно out платформы </summary>
     public float deltaYGenerate = 3f;
+    [Header("\"хвост\"вниз неудаляемый после RespawnPoint")]
+    public float screenHeight = 0;
     [Space(20)]
 
     public Transform reactPoint;
@@ -23,6 +25,9 @@ public class MapBuilder_SC : MonoBehaviour
     public Transform currentRespawnPoint;
 
     public Block_SC currentLastBlock;
+
+    public Block_SC blockWithLastRespawnPosition;
+    public List<GameObject> allBlocks = new List<GameObject>();
 
     private void Start()
     {
@@ -63,6 +68,8 @@ public class MapBuilder_SC : MonoBehaviour
 
         // Запоминаем новый блок как последний
         currentLastBlock = _createdBlock;
+        // Добавляем в общий массив
+        allBlocks.Add(_createdBlock.gameObject);
 
         // Перемещение точек создания и ожидания ТОЛЬКО ПО ВЕРТИКАЛИ
 
@@ -182,9 +189,11 @@ public class MapBuilder_SC : MonoBehaviour
         playerPoint.position = currentRespawnPoint.position;// Перемещение игрока
     }
 
-    public void OnNewRespawnPoint(EventInfo unfo)
+    public void OnNewRespawnPoint(EventInfo info)
     {
-        currentRespawnPoint.position = unfo.position;
+        currentRespawnPoint.position = info.position;
+        blockWithLastRespawnPosition = info.sender.GetComponentInParent<Block_SC>();
+        CheckAllBlocksForDelete();
     }
 
     void Subscribe()
@@ -195,5 +204,23 @@ public class MapBuilder_SC : MonoBehaviour
     void Unscribe()
     {
         Dispatcher_SC.Unsubscribe(EventId.newRespawnPoint, OnNewRespawnPoint);
+    }
+
+    // TODO: Можно проверять не все а только часть до последнего сохранения снизу
+    void CheckAllBlocksForDelete()
+    {
+        for (var i = 0; i < allBlocks.Count; i++)
+        {
+            GameObject obj = allBlocks[i];
+            if (obj)
+            {
+                if (obj.transform.position.y < currentRespawnPoint.position.y - screenHeight &&
+                    obj != blockWithLastRespawnPosition.gameObject)
+                {
+                    Destroy(obj);
+                    // TODO: Нужно очищать память !!!
+                }
+            }
+        }
     }
 }

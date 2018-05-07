@@ -23,12 +23,14 @@ public class EventInfo
     public string name = "unknown";
     public int firstValue = 0;
     public Vector2 position;
+    public GameObject sender;
 
     public EventInfo() { }
 
-    public EventInfo(Vector2 pos)
+    public EventInfo(Vector2 _position, GameObject _sender)
     {
-        position = pos;
+        position = _position;
+        sender = _sender;
     }
 }
 
