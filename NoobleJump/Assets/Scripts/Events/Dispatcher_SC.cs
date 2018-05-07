@@ -12,7 +12,7 @@ public class Dispatcher_SC : MonoBehaviour
     /// </summary>
     /// <param name="id"> id события  </param>
     /// <param name="info"> передаваемая информация </param>
-    public delegate void EventSubscribeHandler(EventId id, EventInfo info);
+    public delegate void EventSubscribeHandler(EventInfo info);
 
     /// <summary> Все подписчики </summary>
     private static Dictionary<int, List<EventSubscribeHandler>> handlers =
@@ -52,7 +52,7 @@ public class Dispatcher_SC : MonoBehaviour
 
         foreach (var subscription in subscriptions)
         {
-            subscription.Invoke(id, info);
+            subscription.Invoke(info);
         }
     }
 }

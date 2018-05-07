@@ -97,7 +97,7 @@ public class PlayerController_SC : Unit_SC
         Invoke("RespawnPlayer", 1f);
         SetUnderGameControlState(true);
 
-        Dispatcher_SC.Send(EventId.playerKilled, new EventInfo("killer", 1));
+        Dispatcher_SC.Send(EventId.playerKilled, new EventInfo());
     }
 
     void RespawnPlayer()

@@ -3,6 +3,7 @@ using System.Collections;
 
 public enum EventId
 {
+    #region  empty info
     unknown = 0,
 
     playerKilled,
@@ -12,23 +13,22 @@ public enum EventId
     gameContinue,
 
     gameInterfaceNeedUpdate,
+    #endregion
+
+    newRespawnPoint,
 }
 
 public class EventInfo
 {
-    public string name;
-    public int firstValue;
+    public string name = "unknown";
+    public int firstValue = 0;
+    public Vector2 position;
 
-    public EventInfo()
-    {
-        name = "unknown";
-        firstValue = 0;
-    }
+    public EventInfo() { }
 
-    public EventInfo(string _name, int _firstValue)
+    public EventInfo(Vector2 pos)
     {
-        name = _name;
-        firstValue = _firstValue;
+        position = pos;
     }
 }
 

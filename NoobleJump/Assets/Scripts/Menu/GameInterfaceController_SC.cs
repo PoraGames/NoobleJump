@@ -23,7 +23,7 @@ public class GameInterfaceController_SC : MonoBehaviour
         Dispatcher_SC.Unsubscribe(EventId.gameInterfaceNeedUpdate, OnGameInterfaceNeedUpdate);
     }
 
-    public void OnGameInterfaceNeedUpdate(EventId id, EventInfo info)
+    public void OnGameInterfaceNeedUpdate(EventInfo info)
     {
         InterfaceUpdate();
     }

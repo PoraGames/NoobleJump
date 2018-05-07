@@ -21,10 +21,13 @@ public class MapBuilder_SC : MonoBehaviour
 
     /// <summary> Где возродится ели умрет прямо сейчас </summary>
     public Transform currentRespawnPoint;
-    /// <summary> Следующие точки респа ([0] всегда ближайшая)</summary>
-    public List<Transform> nextRespawnPoints = new List<Transform>();
 
     public Block_SC currentLastBlock;
+
+    private void Start()
+    {
+        Subscribe();
+    }
 
     private void Update()
     {
@@ -32,31 +35,16 @@ public class MapBuilder_SC : MonoBehaviour
         // TODO: Можно разделить генерацию + создание + активация блока на несколько частей и вызывать в разных Update
         if (CheckTheNeedToCreate())
             CreateNewBlock();
+    }
 
-        CheckNextRespawnPoint();
+    private void OnDestroy()
+    {
+        Unscribe();
     }
 
     bool CheckTheNeedToCreate()
     {
         return playerPoint.position.y >= reactPoint.position.y;
-    }
-
-    /// <summary>
-    /// Проверить дошли ли до следующей точки респауна,
-    /// если да -> обновить точку респауна
-    /// </summary>
-    void CheckNextRespawnPoint()
-    {
-        if (nextRespawnPoints.Count == 0)
-            return;
-
-        // Если игрок выше точки респауна и недалеко от нее по горизонтали
-        if (playerPoint.position.y >= nextRespawnPoints[0].position.y && Mathf.Abs(playerPoint.position.x - nextRespawnPoints[0].position.x) < 1)
-        {
-            currentRespawnPoint.position = nextRespawnPoints[0].position;// Переместить главную точку респауна
-            nextRespawnPoints[0].GetComponent<RespawnPoint_SC>().Activate();
-            nextRespawnPoints.RemoveAt(0);// Убрать точку из массива (теперь новая след точка в позиции [0])
-        }
     }
 
     void CreateNewBlock()
@@ -90,13 +78,6 @@ public class MapBuilder_SC : MonoBehaviour
         {
             reactPoint.position += Vector3.up * deltaYGenerate;
             createPoint.position += Vector3.up * deltaYGenerate;
-        }
-
-        // Новая точка респауна, если нужно
-        if (_createdBlock.respawnPoint != null)
-        {
-            // TODO: Пока берем только одну, потом можно пересмотреть
-            nextRespawnPoints.Add(_createdBlock.respawnPoint.transform);
         }
     }
 
@@ -199,5 +180,20 @@ public class MapBuilder_SC : MonoBehaviour
     public void RespawnPlayer()
     {
         playerPoint.position = currentRespawnPoint.position;// Перемещение игрока
+    }
+
+    public void OnNewRespawnPoint(EventInfo unfo)
+    {
+        currentRespawnPoint.position = unfo.position;
+    }
+
+    void Subscribe()
+    {
+        Dispatcher_SC.Subscribe(EventId.newRespawnPoint, OnNewRespawnPoint);
+    }
+
+    void Unscribe()
+    {
+        Dispatcher_SC.Unsubscribe(EventId.newRespawnPoint, OnNewRespawnPoint);
     }
 }
