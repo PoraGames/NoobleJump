@@ -96,11 +96,19 @@ public class PlayerController_SC : Unit_SC
         // Отнять 1 здоровье
         AddHealth(-1);
         Dispatcher_SC.Send(EventId.gameInterfaceNeedUpdate, new EventInfo());
-
-        Invoke("RespawnPlayer", 1f);
-        SetUnderGameControlState(true);
-
         Dispatcher_SC.Send(EventId.playerKilled, new EventInfo());
+
+        // Если еще остались жизни, то автоматически возродить и продолжить игру,
+        // если нет сообщить об этом всем
+        if (health > 0)
+        {
+            Invoke("RespawnPlayer", 1f);
+            SetUnderGameControlState(true);
+        }
+        else
+        {
+            Dispatcher_SC.Send(EventId.playerKilledAndHaveNotHealth, new EventInfo());
+        }
     }
 
     void RespawnPlayer()

@@ -8,6 +8,7 @@ public enum EventId
 
     playerKilled,
     playerRespawned,
+    playerKilledAndHaveNotHealth,
 
     gamePaused,
     gameContinue,
