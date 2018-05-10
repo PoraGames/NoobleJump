@@ -61,10 +61,30 @@ public class PlayerController_SC : Unit_SC
 
         if (!inJump && !isUnderGameControl)
         {
+
+#if UNITY_EDITOR
+
             if (Input.GetKey(KeyCode.D))
                 _coeff += 1;
             if (Input.GetKey(KeyCode.A))
                 _coeff -= 1;
+
+#endif
+
+#if UNITY_ANDROID
+
+            if (Input.touchCount > 0)
+            {
+                float xTouchPos = Input.touches[0].position.x;
+                float xPosInScreenPart = xTouchPos / Screen.width;
+
+                if (xPosInScreenPart > 0.6f)
+                    _coeff += 1;
+                if (xPosInScreenPart < 0.4f)
+                    _coeff -= 1;
+            }
+
+#endif
         }
 
         Move(_coeff);
