@@ -105,9 +105,16 @@ public class PlayerController_SC : Unit_SC
         if (!inJump)// Предотвращение случайных вызовов
             return;
 
+        // Если у платформы необычный коэффициент прыжка, то учесть его
+        float powerJumpWithCoeffs = 0;
+        if (lastPlatform)
+        {
+            powerJumpWithCoeffs = powerJump * lastPlatform.jumpCoeff;
+        }
+
         inJump = false;
         lastJumpTimer = 0f;
-        rb.velocity = new Vector2(rb.velocity.x, powerJump);
+        rb.velocity = new Vector2(rb.velocity.x, powerJumpWithCoeffs);
     }
 
     public override void Kill()

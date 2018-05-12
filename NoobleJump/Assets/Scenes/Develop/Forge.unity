@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &124652025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -430,6 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &293375098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -670,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &346492283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1049,6 +1052,7 @@ MonoBehaviour:
   - SavePoint
   - heart
   - Apple
+  - Mashroom
 --- !u!4 &596436778
 Transform:
   m_ObjectHideFlags: 0
@@ -1171,6 +1175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &714230184
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1469,6 +1474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &1135172375
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1769,6 +1775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &1461108096
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2112,6 +2119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &1730125317
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2353,6 +2361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &1864610684
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2562,6 +2571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
+  jumpCoeff: 1
 --- !u!61 &1999516621
 BoxCollider2D:
   m_ObjectHideFlags: 0
