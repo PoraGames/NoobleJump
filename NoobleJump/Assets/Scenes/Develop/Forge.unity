@@ -113,11 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &21552714 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1623990543788966, guid: 53bbeef87e7a9d34482388d439ffe6d3,
-    type: 2}
-  m_PrefabInternal: {fileID: 217184926}
 --- !u!4 &105723687
 Transform:
   m_ObjectHideFlags: 0
@@ -251,48 +246,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1001 &217184926
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -17.7776
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.45449468
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4859566984239434, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &218882908
 Prefab:
   m_ObjectHideFlags: 0
@@ -2264,7 +2217,7 @@ MonoBehaviour:
   etalons:
   - {fileID: 1969268090354200, guid: 0c34b4a68ef11a849bb7271ef626d87d, type: 2}
   objectsForCheck:
-  - {fileID: 21552714}
+  - {fileID: 0}
 --- !u!4 &1782006406
 Transform:
   m_ObjectHideFlags: 0
