@@ -1,0 +1,15 @@
+Список, содержащий значения Order in Layer для всех типов объектов в игре
+
+BackGround (-00; -100]
+
+Objects behind platform [-10; -1]
+
+Platform main part [0; 9)
+
+Objects before platform [10; 19]
+
+Bonuses [20; 24]
+
+Player [25; 29]
+
+Enemy 50+
