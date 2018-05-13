@@ -185,6 +185,7 @@ public class PlayerController_SC : Unit_SC
 
     void RespawnPlayer()
     {
+        Dispatcher_SC.Send(EventId.playerRespawned, new EventInfo());
         mainMapBuilderSc.RespawnPlayer();
         killAnim.Play("idle");// Убрать эффект смерти с персонажа
         SetUnderGameControlState(false);
