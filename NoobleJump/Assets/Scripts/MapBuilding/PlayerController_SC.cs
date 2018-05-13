@@ -70,9 +70,9 @@ public class PlayerController_SC : Unit_SC
     {
         float _coeff = 0; 
 
+        // Управление движениями
         if (!inJump && !isUnderGameControl)
         {
-
 #if UNITY_EDITOR
 
             if (Input.GetKeyDown(KeyCode.D))
