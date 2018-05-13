@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
+public enum MoveDirect
+{
+    none,
+    left,
+    right,
+}
+
 public class PlayerController_SC : Unit_SC
 {
     public float powerJump = 5f;
@@ -16,6 +23,8 @@ public class PlayerController_SC : Unit_SC
 
     private float lastJumpTimer = 0f;
     private bool inJump = false;
+
+    public MoveDirect lastTapDirect = MoveDirect.none;
 
     #region Unity selection
     void Awake()
@@ -49,6 +58,8 @@ public class PlayerController_SC : Unit_SC
 
             Debug.Log("jump reset");
         }
+
+        InputReader();
     }
     #endregion
 
@@ -57,17 +68,22 @@ public class PlayerController_SC : Unit_SC
     /// </summary>
     private void InputReader()
     {
-        float _coeff = 0;
+        float _coeff = 0; 
 
         if (!inJump && !isUnderGameControl)
         {
 
 #if UNITY_EDITOR
 
-            if (Input.GetKey(KeyCode.D))
-                _coeff += 1;
-            if (Input.GetKey(KeyCode.A))
-                _coeff -= 1;
+            if (Input.GetKeyDown(KeyCode.D))
+                lastTapDirect = MoveDirect.right;
+            if (Input.GetKeyDown(KeyCode.A))
+                lastTapDirect = MoveDirect.left;
+
+            if (Input.GetKey(KeyCode.D) && (lastTapDirect == MoveDirect.right || _coeff == 0))
+                _coeff = 1;
+            if (Input.GetKey(KeyCode.A) && (lastTapDirect == MoveDirect.left || _coeff == 0))
+                _coeff = -1;
 
 #endif
 
@@ -75,13 +91,42 @@ public class PlayerController_SC : Unit_SC
 
             if (Input.touchCount > 0)
             {
-                float xTouchPos = Input.touches[0].position.x;
-                float xPosInScreenPart = xTouchPos / Screen.width;
+                MoveDirect touchDirect = MoveDirect.none;
 
-                if (xPosInScreenPart > 0.6f)
-                    _coeff += 1;
-                if (xPosInScreenPart < 0.4f)
-                    _coeff -= 1;
+                foreach (Touch touch in Input.touches)
+                {
+                    // Определение направления движения для этого касания
+                    float xTouchPos = touch.position.x; // В пикселях
+                    float xPosInScreenPart = xTouchPos / Screen.width; // В долях
+                    if (xPosInScreenPart > 0.6f)
+                        touchDirect = MoveDirect.right;
+                    if (xPosInScreenPart < 0.4f)
+                        touchDirect = MoveDirect.left;
+
+                    // Если касание новое, то зарегистрировать актуальное направление
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        lastTapDirect = touchDirect;
+                    }
+
+                    // Движение вправо
+                    if (touchDirect == MoveDirect.right &&
+                        lastTapDirect == MoveDirect.right ||
+                        _coeff == 0 &&
+                        touchDirect == MoveDirect.right)
+                    {
+                        _coeff = 1;
+                    }
+
+                    // Движение влево
+                    if (touchDirect == MoveDirect.left &&
+                        lastTapDirect == MoveDirect.left ||
+                        _coeff == 0 &&
+                        touchDirect == MoveDirect.left)
+                    {
+                        _coeff = -1;
+                    }
+                }
             }
 
 #endif
