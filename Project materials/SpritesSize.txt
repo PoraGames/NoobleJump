@@ -1,0 +1,6 @@
+Platform 500 x 100
+
+Small objects (Player, Bonuses, HiJump) 100 x 100
+
+BigObjects (Save points) 300 x 300
+
