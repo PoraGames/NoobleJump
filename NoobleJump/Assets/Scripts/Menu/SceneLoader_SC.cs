@@ -13,23 +13,36 @@ public class SceneLoader_SC : MonoBehaviour
 
     private string needLevelName;
     private AsyncOperation asyncOperation;
+    private bool loadingNow = false;
 
     public void ReloadScene()
     {
+        // Перезагрузка происходит достаточно быстро, судя по тестам
+        // и пока не нуждается в асинхронной загрузке и сплешарте
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
     }
 
     public void LoadScene(string sceneName)
     {
-        // Dispatcher_SC.Send(EventId.splashOn, new EventInfo());
-        needLevelName = sceneName;
+        if (loadingNow)
+        {
+            Debug.LogError("Загрузка другого уровня еще не завершена");
+            return;
+        }
 
+        loadingNow = true;
+        needLevelName = sceneName;
         StartCoroutine(LoadLevelWithAsync());
     }
 
+    /// <summary>
+    /// Асинхронная загрузка уровня, включает управление сплеш артом
+    /// </summary>
     IEnumerator LoadLevelWithAsync()
     {
+        // Картинка перед загрузкой
         float timer = 0f;
         while (timer < timeBeforeStartSceneLoading)
         {
@@ -39,16 +52,17 @@ public class SceneLoader_SC : MonoBehaviour
             yield return null;
         }
 
+        // Загрузка
         asyncOperation = SceneManager.LoadSceneAsync(needLevelName);
         asyncOperation.allowSceneActivation = true;
-
         while (!asyncOperation.isDone)
         {
-            Debug.Log(asyncOperation.progress);
+            // TODO: Место для визуализации прогресса загрузки уровня
 
             yield return new WaitForFixedUpdate();
         }
 
+        // Картинка после загрузки
         timer = 0f;
         while (timer < timeAfterSceneLoading)
         {
@@ -58,5 +72,7 @@ public class SceneLoader_SC : MonoBehaviour
 
             yield return null;
         }
+
+        loadingNow = false;
     }
 }
