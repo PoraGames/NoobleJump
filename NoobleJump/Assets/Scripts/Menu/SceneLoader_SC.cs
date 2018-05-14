@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +12,19 @@ public class SceneLoader_SC : MonoBehaviour
 
     private string needLevelName;
     private AsyncOperation asyncOperation;
-    private bool loadingNow = false;
+    public bool loadingNow = false;
+
+    void Awake()
+    {
+        Dispatcher_SC.Subscribe(EventId.needLoadScene, OnNeedLoadScene);
+        Dispatcher_SC.Subscribe(EventId.needReloadScene, OnNeedReloadScene);
+    }
+
+    void OnDestroy()
+    {
+        Dispatcher_SC.Unsubscribe(EventId.needLoadScene, OnNeedLoadScene);
+        Dispatcher_SC.Subscribe(EventId.needReloadScene, OnNeedReloadScene);
+    }
 
     public void ReloadScene()
     {
@@ -26,15 +37,33 @@ public class SceneLoader_SC : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        Debug.Log(SceneManager.GetSceneByName(sceneName).name);
+        //if (SceneManager.GetSceneByName(sceneName).name != sceneName)
+        //{
+
+        //}
+
         if (loadingNow)
         {
             Debug.LogError("Загрузка другого уровня еще не завершена");
             return;
         }
 
+        Time.timeScale = 1;
         loadingNow = true;
         needLevelName = sceneName;
         StartCoroutine(LoadLevelWithAsync());
+    }
+
+    void OnNeedReloadScene(EventInfo info)
+    {
+        ReloadScene();
+    }
+
+    void OnNeedLoadScene(EventInfo info)
+    {
+        Debug.Log("need to load : " + info.name);
+        LoadScene(info.name);
     }
 
     /// <summary>
@@ -42,6 +71,7 @@ public class SceneLoader_SC : MonoBehaviour
     /// </summary>
     IEnumerator LoadLevelWithAsync()
     {
+        Debug.Log("LoadLevelWithAsync");
         // Картинка перед загрузкой
         float timer = 0f;
         while (timer < timeBeforeStartSceneLoading)
@@ -66,7 +96,6 @@ public class SceneLoader_SC : MonoBehaviour
         timer = 0f;
         while (timer < timeAfterSceneLoading)
         {
-            Debug.Log("afterparty");
             timer += Time.deltaTime;
             splashImage.color = new Color(1, 1, 1, 1 - (timer / timeAfterSceneLoading));
 

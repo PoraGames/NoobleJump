@@ -17,6 +17,9 @@ public enum EventId
     #endregion
 
     newRespawnPoint,
+
+    needLoadScene,
+    needReloadScene,
 }
 
 public class EventInfo
@@ -32,6 +35,11 @@ public class EventInfo
     {
         position = _position;
         sender = _sender;
+    }
+
+    public EventInfo(string _name)
+    {
+        name = _name;
     }
 }
 
