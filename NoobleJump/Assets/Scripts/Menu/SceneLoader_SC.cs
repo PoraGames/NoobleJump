@@ -37,12 +37,6 @@ public class SceneLoader_SC : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        Debug.Log(SceneManager.GetSceneByName(sceneName).name);
-        //if (SceneManager.GetSceneByName(sceneName).name != sceneName)
-        //{
-
-        //}
-
         if (loadingNow)
         {
             Debug.LogError("Загрузка другого уровня еще не завершена");
@@ -62,7 +56,6 @@ public class SceneLoader_SC : MonoBehaviour
 
     void OnNeedLoadScene(EventInfo info)
     {
-        Debug.Log("need to load : " + info.name);
         LoadScene(info.name);
     }
 
@@ -71,23 +64,23 @@ public class SceneLoader_SC : MonoBehaviour
     /// </summary>
     IEnumerator LoadLevelWithAsync()
     {
-        Debug.Log("LoadLevelWithAsync");
         // Картинка перед загрузкой
         float timer = 0f;
         while (timer < timeBeforeStartSceneLoading)
         {
             timer += Time.deltaTime;
-            splashImage.color = new Color(1, 1, 1, timer / timeBeforeStartSceneLoading);
+            splashImage.color = new Color(1, 1, 0, timer / timeBeforeStartSceneLoading);
 
             yield return null;
         }
 
         // Загрузка
         asyncOperation = SceneManager.LoadSceneAsync(needLevelName);
-        asyncOperation.allowSceneActivation = true;
         while (!asyncOperation.isDone)
         {
             // TODO: Место для визуализации прогресса загрузки уровня
+            splashImage.color = new Color(1 - asyncOperation.progress, 1, 0, 1);
+            Debug.Log(asyncOperation.progress);
 
             yield return new WaitForFixedUpdate();
         }
@@ -97,7 +90,7 @@ public class SceneLoader_SC : MonoBehaviour
         while (timer < timeAfterSceneLoading)
         {
             timer += Time.deltaTime;
-            splashImage.color = new Color(1, 1, 1, 1 - (timer / timeAfterSceneLoading));
+            splashImage.color = new Color(1, 1, 0, 1 - (timer / timeAfterSceneLoading));
 
             yield return null;
         }
