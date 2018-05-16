@@ -2223,8 +2223,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needCheck: 0
   etalons:
-  - {fileID: 1969268090354200, guid: 0c34b4a68ef11a849bb7271ef626d87d, type: 2}
+  - {fileID: 0}
   objectsForCheck:
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &1782006406
 Transform:
