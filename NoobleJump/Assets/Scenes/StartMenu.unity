@@ -518,9 +518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splashImage: {fileID: 73142912}
   progressBar: {fileID: 2109250699}
-  timeBeforeStartSceneLoading: 1
-  timeAfterSceneLoading: 0.5
-  minLoadinfTime: 2.5
+  timeBeforeStartSceneLoading: 0.75
+  timeAfterSceneLoading: 0.25
+  minLoadinfTime: 2
   loadingNow: 0
 --- !u!4 &282324085
 Transform:
