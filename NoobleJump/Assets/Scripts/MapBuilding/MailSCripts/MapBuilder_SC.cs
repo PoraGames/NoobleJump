@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Boo.Lang;
+using System.Collections.Generic;
 
 public enum WorldType
 {
@@ -252,6 +252,6 @@ public class MapBuilder_SC : MonoBehaviour
     public void ChangeWorldType(WorldType newWorldType)
     {
         currentWorldType = newWorldType;
-        Debug.Log("Тип локации изменен на " + currentWorldType);
+        Debug.Log($"Тип локации изменен на {currentWorldType}");
     }
 }
