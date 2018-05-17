@@ -2,8 +2,27 @@
 using System.Collections;
 using Boo.Lang;
 
+public enum WorldType
+{
+    /// <summary>
+    /// Черно-белый
+    /// </summary>
+    BW,
+
+    // Пока просто затычки
+    green,
+    red,
+}
+
 public class MapBuilder_SC : MonoBehaviour
 {
+    private static WorldType currentWorldType = WorldType.BW;
+    /// <summary> Доступ к приватной переменной <see cref="currentWorldType"/> </summary>
+    public static WorldType CurrentWorldType
+    {
+        get { return currentWorldType; }
+    }
+
     [Header("Параметры генерации блоков")]
     /// <summary> Максимальное отдаление краев связывающих блоки платформ </summary>
     public float maxDeltaXGenerate = 4f;
@@ -228,5 +247,11 @@ public class MapBuilder_SC : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ChangeWorldType(WorldType newWorldType)
+    {
+        currentWorldType = newWorldType;
+        Debug.Log("Тип локации изменен на " + currentWorldType);
     }
 }
