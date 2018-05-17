@@ -251,6 +251,8 @@ public class MapBuilder_SC : MonoBehaviour
 
     public void ChangeWorldType(WorldType newWorldType)
     {
+        // TODO: Добавить изменение уже существующих блоков
+
         currentWorldType = newWorldType;
         Debug.Log($"Тип локации изменен на {currentWorldType}");
     }
