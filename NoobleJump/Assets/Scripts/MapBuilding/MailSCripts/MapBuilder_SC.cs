@@ -125,12 +125,12 @@ public class MapBuilder_SC : MonoBehaviour
         Block_SC _block;
         bool isBlockCorrect = false;
 
-        float outPlatformRightEndLocalPosX;
-        float inPlatformLeftEndPosX;
-        bool isRightSideCorrect;
-        float outPlatformLeftEndLocalPosX;
-        float inPlatformRightEndPosX;
-        bool isLeftSideCorrect;
+        float outPlatformRightEndLocalPosX = 0;
+        float inPlatformLeftEndPosX = 0;
+        bool isRightSideCorrect = false;
+        float outPlatformLeftEndLocalPosX = 0;
+        float inPlatformRightEndPosX = 0;
+        bool isLeftSideCorrect = false;
 
         do
         {
@@ -139,32 +139,41 @@ public class MapBuilder_SC : MonoBehaviour
 
             // TODO: другие проверки
 
-            #region Проверка на совместимость связующих блоков погоризонтальным позициям блоков
-            // Вычисление локальной позиции по X
-            // правого края выходной платформы последнего созданного блока,
-            // относительно трансформа последнего созданного блока
-            outPlatformRightEndLocalPosX = currentLastBlock.transform
-                .InverseTransformPoint(currentLastBlock.outPlatform.rightEnd.transform.position).x;
-
-            // Вычисление локальной позиции по X
-            // левого края входной платформы сгенерированного блока-претендента,
-            // относительно трансформа блока-претендента 
-            inPlatformLeftEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.leftEnd.position).x;
-
+            // TODO: добавить проверку на упор в стену выходной платформы блока с односторонней доступностью
+            #region Проверка на совместимость связующих блоков погоризонтальным позициям блоков и типу доступа
             // Можно ли вставить справа
-            isRightSideCorrect =
-                (inPlatformLeftEndPosX + _block.rightGap > outPlatformRightEndLocalPosX &&
-                 inPlatformLeftEndPosX - _block.leftGap <= outPlatformRightEndLocalPosX);
+            isRightSideCorrect = false;
+            if (currentLastBlock.outPlatform.CheckRightCompatibility(_block.inPlatform.accessibility))
+            {
+                // Вычисление локальной позиции по X
+                // правого края выходной платформы последнего созданного блока,
+                // относительно трансформа последнего созданного блока
+                outPlatformRightEndLocalPosX = currentLastBlock.transform
+                    .InverseTransformPoint(currentLastBlock.outPlatform.rightEnd.transform.position).x;
 
-            // То же самое (только зеркально) для проверки возможности вставки слева
-            outPlatformLeftEndLocalPosX = currentLastBlock.transform
-                .InverseTransformPoint(currentLastBlock.outPlatform.leftEnd.transform.position).x;
-            inPlatformRightEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.rightEnd.position).x;
+                // Вычисление локальной позиции по X
+                // левого края входной платформы сгенерированного блока-претендента,
+                // относительно трансформа блока-претендента 
+                inPlatformLeftEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.leftEnd.position).x;
+
+                isRightSideCorrect =
+                    (inPlatformLeftEndPosX + _block.rightGap > outPlatformRightEndLocalPosX &&
+                     inPlatformLeftEndPosX - _block.leftGap <= outPlatformRightEndLocalPosX);
+            }
 
             // Можно ли вставить слева
-            isLeftSideCorrect =
-                (inPlatformRightEndPosX - _block.leftGap < outPlatformLeftEndLocalPosX &&
-                 inPlatformRightEndPosX + _block.rightGap >= outPlatformLeftEndLocalPosX);
+            isLeftSideCorrect = false;
+            if (currentLastBlock.outPlatform.CheckLeftCompatibility(_block.inPlatform.accessibility))
+            {
+                // То же самое (только зеркально) для проверки возможности вставки слева
+                outPlatformLeftEndLocalPosX = currentLastBlock.transform
+                    .InverseTransformPoint(currentLastBlock.outPlatform.leftEnd.transform.position).x;
+                inPlatformRightEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.rightEnd.position).x;
+
+                isLeftSideCorrect =
+                    (inPlatformRightEndPosX - _block.leftGap < outPlatformLeftEndLocalPosX &&
+                     inPlatformRightEndPosX + _block.rightGap >= outPlatformLeftEndLocalPosX);
+            }
             #endregion
 
             // Во избежании зацикливания
