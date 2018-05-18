@@ -14,6 +14,7 @@ public class Block_SC : MonoBehaviour
     private const float horisontalMapSize = 35.5f;
 
     public Transform horShifter;
+
     [Header("Для следующего блока")]
     public Transform positionForCreatePoint;
 

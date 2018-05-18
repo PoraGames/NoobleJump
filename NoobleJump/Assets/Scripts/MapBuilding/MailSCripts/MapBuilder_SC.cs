@@ -23,8 +23,8 @@ public class MapBuilder_SC : MonoBehaviour
         get { return currentWorldType; }
     }
 
-    [Header("Параметры генерации блоков")]
     /// <summary> Максимальное отдаление краев связывающих блоки платформ </summary>
+    [Header("Параметры генерации блоков")]
     public float maxDeltaXGenerate = 4f;
     /// <summary> Стандартный отступ при генерации нового блока относительно out платформы </summary>
     public float deltaYGenerate = 3f;
@@ -161,7 +161,7 @@ public class MapBuilder_SC : MonoBehaviour
                 .InverseTransformPoint(currentLastBlock.outPlatform.leftEnd.transform.position).x;
             inPlatformRightEndPosX = _block.transform.InverseTransformPoint(_block.inPlatform.rightEnd.position).x;
 
-            // Можно ли вставить справа
+            // Можно ли вставить слева
             isLeftSideCorrect =
                 (inPlatformRightEndPosX - _block.leftGap < outPlatformLeftEndLocalPosX &&
                  inPlatformRightEndPosX + _block.rightGap >= outPlatformLeftEndLocalPosX);
