@@ -510,7 +510,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378554321281436}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.18, y: 0.04, z: 0}
+  m_LocalPosition: {x: 4.33, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4875095626862638}
@@ -840,7 +840,7 @@ MonoBehaviour:
   outObject: {fileID: 1396639252979716}
   inPlatform: {fileID: 114862533062221676}
   outPlatform: {fileID: 114862533062221676}
-  leftGap: 10.18
+  leftGap: 4.33
   rightGap: 20.48
 --- !u!212 &212056660525350554
 SpriteRenderer:
