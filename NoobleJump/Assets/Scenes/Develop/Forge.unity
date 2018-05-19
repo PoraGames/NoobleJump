@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -429,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -670,6 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -1173,6 +1176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -1472,6 +1476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -1773,6 +1778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -2117,6 +2123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -2360,6 +2367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1
@@ -2570,6 +2578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61711da0b38ba24dbd3527be3cee0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessibility: 0
   leftEnd: {fileID: 0}
   rightEnd: {fileID: 0}
   jumpCoeff: 1

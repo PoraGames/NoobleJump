@@ -481,10 +481,13 @@ MonoBehaviour:
   playerPoint: {fileID: 932501815}
   blocksForBuild:
   - {fileID: 114486735507187676, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
+  - {fileID: 114877343636015604, guid: 73a7c1eea29576844a57b60a790ef11c, type: 2}
+  - {fileID: 114883781514242270, guid: e02805c2b1ff7b64ba0a2f9ef3a6f2e7, type: 2}
   rootForAllGeneratedMap: {fileID: 1229432671}
   currentRespawnPoint: {fileID: 392507165}
   currentLastBlock: {fileID: 2117318402}
   blockWithLastRespawnPosition: {fileID: 0}
+  allBlocks: []
 --- !u!4 &784191141
 Transform:
   m_ObjectHideFlags: 0
