@@ -63,7 +63,7 @@ public class Block_SC : MonoBehaviour
                         horisontalMapSize - 
                         (transform.InverseTransformPoint(outPlatform.rightEnd.position).x + 
                          MapBuilder_SC.MIN_SHIFT_FOR_BLOCK_WITH_SINGLE_SIDE_PLATFORM);
-                    rightGap = Mathf.Max(rightGap, needForCorrectRightGeneration);
+                    rightGap = Mathf.Min(rightGap, needForCorrectRightGeneration);
                 }
             }
     }
