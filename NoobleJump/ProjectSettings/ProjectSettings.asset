@@ -634,7 +634,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 8d659c87-c24a-48a5-ab43-7f8f360ce72b
   projectName: NoobleJump (1)
   organizationId: lexazd25
