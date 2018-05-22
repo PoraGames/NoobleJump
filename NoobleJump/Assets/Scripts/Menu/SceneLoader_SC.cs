@@ -111,7 +111,7 @@ public class SceneLoader_SC : MonoBehaviour
         while (timer < timeAfterSceneLoading)
         {
             timer += Time.deltaTime;
-            splashImage.color = new Color(0.8f, 1, 0.8f, 1 - (timer / timeAfterSceneLoading));// Постепенное исчезание сплеш арта
+            splashImage.color = new Color(1, 1, 1, 1 - (timer / timeAfterSceneLoading));// Постепенное исчезание сплеш арта
 
             yield return null;
         }
