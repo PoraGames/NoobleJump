@@ -21,6 +21,7 @@ public class Block_SC : MonoBehaviour
     public Transform positionForCreatePoint;
 
     [Header("Края блока (влияют на возможность горизонтального сдвига)")]
+    public bool manualSettings = false;
     public Transform leftEnd;
     public Transform rightEnd;
 
@@ -39,7 +40,11 @@ public class Block_SC : MonoBehaviour
 #if UNITY_EDITOR
     void Update()
     {
+        // TODO: Подумать что оставить здесь, а что вызывать реже
+
         FindContactPlatforms();
+        if (!manualSettings)
+            ProcedureReplaceBlockEnds();
         CalculateGaps();
     }
 #endif
@@ -95,5 +100,13 @@ public class Block_SC : MonoBehaviour
             outPlatform = null;
             Debug.Log("Нужно задать контактные объекты для блока :" + name);
         }
+    }
+
+    /// <summary>
+    /// Автоматический подгон карев блока под элументы в нем
+    /// </summary>
+    void ProcedureReplaceBlockEnds()
+    {
+        // TODO: Заполнить
     }
 }
