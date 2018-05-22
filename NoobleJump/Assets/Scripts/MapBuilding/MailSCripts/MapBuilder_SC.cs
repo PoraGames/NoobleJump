@@ -42,7 +42,9 @@ public class MapBuilder_SC : MonoBehaviour
     public Transform createPoint;
     public Transform playerPoint;
 
+    [Space(25)]
     public Block_SC[] blocksForBuild;
+    [Space(25)]
 
     public Transform rootForAllGeneratedMap;
 
@@ -111,11 +113,15 @@ public class MapBuilder_SC : MonoBehaviour
             reactPoint.position += Vector3.up * deltaY;
             createPoint.position += Vector3.up * deltaY;
         }
-        // Если нет, то берем дефолтное значение из настроек
+        // Если нет, то отступаем дефолтное значение (из настроек) от выходной платформы
         else
         {
-            reactPoint.position += Vector3.up * deltaYGenerate;
-            createPoint.position += Vector3.up * deltaYGenerate;
+            // Находим Y позицию платформы по позиции левого края
+            // (Расчет на то что пока что все платформы горизонтальные, и такой способ подходит)
+            float deltaY = (_createdBlock.outPlatform.leftEnd.position.y - createPoint.position.y)
+                           + deltaYGenerate;
+            reactPoint.position += Vector3.up * deltaY;
+            createPoint.position += Vector3.up * deltaY;
         }
     }
 
