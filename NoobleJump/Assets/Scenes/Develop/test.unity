@@ -379,10 +379,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 392507165}
+  - component: {fileID: 392507166}
   m_Layer: 0
   m_Name: RespawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -399,6 +400,19 @@ Transform:
   m_Father: {fileID: 784191141}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &392507166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 392507164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f535dd8684014facfd30a81fd0497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 0.5
+  color: {r: 0.11724138, g: 1, b: 0, a: 1}
 --- !u!1001 &578001892
 Prefab:
   m_ObjectHideFlags: 0
@@ -483,6 +497,7 @@ MonoBehaviour:
   - {fileID: 114486735507187676, guid: 53bbeef87e7a9d34482388d439ffe6d3, type: 2}
   - {fileID: 114877343636015604, guid: 73a7c1eea29576844a57b60a790ef11c, type: 2}
   - {fileID: 114883781514242270, guid: e02805c2b1ff7b64ba0a2f9ef3a6f2e7, type: 2}
+  - {fileID: 114837225756992952, guid: 653297714e6836c4bb80a01c6b148218, type: 2}
   rootForAllGeneratedMap: {fileID: 1229432671}
   currentRespawnPoint: {fileID: 392507165}
   currentLastBlock: {fileID: 2117318402}
@@ -512,10 +527,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 844404991}
+  - component: {fileID: 844404992}
   m_Layer: 0
   m_Name: ReactPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -532,6 +548,19 @@ Transform:
   m_Father: {fileID: 784191141}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844404992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 844404990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f535dd8684014facfd30a81fd0497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 0.5
+  color: {r: 1, g: 0.015686274, b: 0.015686274, a: 1}
 --- !u!1 &892419540
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,10 +807,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1625198132}
+  - component: {fileID: 1625198133}
   m_Layer: 0
   m_Name: CreatePoint
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -798,6 +828,19 @@ Transform:
   m_Father: {fileID: 784191141}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1625198133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1625198131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f535dd8684014facfd30a81fd0497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 0.5
+  color: {r: 1, g: 0.6827586, b: 0, a: 1}
 --- !u!224 &1947103443 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224152059514435578, guid: 88702b1017e1ff24cb4a851604038b9a,
