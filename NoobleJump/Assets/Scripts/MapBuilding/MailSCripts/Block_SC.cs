@@ -6,9 +6,11 @@ using UnityEditor;
 #endif
 
 /// <summary>
-/// То из чего строится карта
+///     То из чего строится карта
 /// </summary>
+#if UNITY_EDITOR
 [ExecuteInEditMode]
+#endif
 public class Block_SC : MonoBehaviour
 {
     private const float horisontalMapSize = 35.5f;
@@ -25,10 +27,6 @@ public class Block_SC : MonoBehaviour
     [Header("Связующие объекты")]
     public GameObject inObject;
     public GameObject outObject;
-
-    [Space(40)]
-    [Header("Вычисляется в коде")]
-    [Space(10)]
 
     [Header("Связующие платформы")]
     public Platform_SC inPlatform;
