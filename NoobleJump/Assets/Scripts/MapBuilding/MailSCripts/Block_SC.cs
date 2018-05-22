@@ -54,6 +54,20 @@ public class Block_SC : MonoBehaviour
         // Вычисления производятся в локальных координатах относительно головного трансформа блока
         leftGap = transform.InverseTransformPoint(leftEnd.position).x;
         rightGap = horisontalMapSize - transform.InverseTransformPoint(rightEnd.position).x;
+
+        // Если выходная платформа односторонняя, то корректировка leftGap и rightGap
+        if (outPlatform)
+            if (outPlatform.accessibility != PlatformAccessibility.free)
+            {
+                if (outPlatform.accessibility == PlatformAccessibility.rightOnly)
+                {
+                    float needForCorrectRightGeneration = 
+                        horisontalMapSize - 
+                        (transform.InverseTransformPoint(outPlatform.rightEnd.position).x + 
+                         MapBuilder_SC.MIN_SHIFT_FOR_BLOCK_WITH_SINGLE_SIDE_PLATFORM);
+                    rightGap = Mathf.Max(rightGap, needForCorrectRightGeneration);
+                }
+            }
     }
 
     /// <summary>

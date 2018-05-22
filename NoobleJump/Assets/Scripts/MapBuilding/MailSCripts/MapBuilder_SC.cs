@@ -16,6 +16,12 @@ public enum WorldType
 
 public class MapBuilder_SC : MonoBehaviour
 {
+    /// <summary>
+    /// Минимальное расстояние, кторое можно оставить между
+    /// краем односторонней платформы и вертикальнымкраем карты
+    /// </summary>
+    public static float MIN_SHIFT_FOR_BLOCK_WITH_SINGLE_SIDE_PLATFORM = 6;
+
     private static WorldType currentWorldType = WorldType.BW;
     /// <summary> Доступ к приватной переменной <see cref="currentWorldType"/> </summary>
     public static WorldType CurrentWorldType
