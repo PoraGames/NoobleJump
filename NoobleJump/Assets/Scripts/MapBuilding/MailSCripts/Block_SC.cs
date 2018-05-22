@@ -65,7 +65,18 @@ public class Block_SC : MonoBehaviour
                          MapBuilder_SC.MIN_SHIFT_FOR_BLOCK_WITH_SINGLE_SIDE_PLATFORM);
                     rightGap = Mathf.Min(rightGap, needForCorrectRightGeneration);
                 }
+                else if (outPlatform.accessibility == PlatformAccessibility.leftOnly)
+                {
+                    float needForCorrectLeftGeneration =
+                        (transform.InverseTransformPoint(outPlatform.rightEnd.position).x
+                        - 0 // Левый край карты всегда в нуле
+                        - MapBuilder_SC.MIN_SHIFT_FOR_BLOCK_WITH_SINGLE_SIDE_PLATFORM);
+                    leftGap = Mathf.Min(leftGap, needForCorrectLeftGeneration);
+                }
             }
+
+        // Если входная платформа односторонняя,
+        // то это не накладывает дополнительных ограничений при генерации
     }
 
     /// <summary>
